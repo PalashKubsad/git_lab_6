@@ -6,12 +6,17 @@ on:
 
 jobs:
   check-file:
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Check student data file
-        shell: cmd
-        run: if exist studentdata.txt (echo File exists) else (exit /b 1)
+        shell: bash
+        run: |
+          if [ -f studentdata.txt ]; then
+            echo "File exists"
+          else
+            exit 1
+          fi
